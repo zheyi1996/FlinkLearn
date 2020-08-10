@@ -18,6 +18,31 @@
                     <encoding>utf-8</encoding>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass></mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- 指定在打包节点执行jar包合并操作 -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -48,10 +73,19 @@
         </dependency>
 
         <!-- Flink Kafka支持 -->
+        <!-- Flink Kafka 连接器 -->
         <dependency>
             <groupId>org.apache.flink</groupId>
+<!--            <artifactId>flink-connector-kafka-0.11_2.12</artifactId>-->
             <artifactId>flink-connector-kafka_2.12</artifactId>
             <version>1.8.0</version>
+        </dependency>
+
+        <!-- Kafka 数据生成客户端 -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>0.11.0.0</version>
         </dependency>
 
     </dependencies>
