@@ -17,6 +17,7 @@ object KafkaConnectorDemo {
     properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
     println("----------test---------")
     val stream = env.addSource(new FlinkKafkaConsumer[String]("test", new SimpleStringSchema, properties))
+        .slotSharingGroup("1")
     stream.print("stream")
     env.execute("KafkaTest")
   }
